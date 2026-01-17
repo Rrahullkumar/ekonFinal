@@ -18,7 +18,7 @@ export default function PortfolioHeading() {
       } else {
         spanned += `<span style="
           display: inline-block;
-          letter-spacing: 3px;
+          letter-spacing: 10px;
           font-weight: 400;
           animation-duration: 1s;
           animation-iteration-count: 1;
@@ -49,11 +49,12 @@ export default function PortfolioHeading() {
         .portfolio-text {
           overflow: hidden;
           line-height: 1;
+          letter-spacing: 3px;
         }
       `}</style>
       <h2 
         ref={headingRef}
-        className="portfolio-text"
+        className="portfolio-text "
       >
         PORTFOLIO
       </h2>

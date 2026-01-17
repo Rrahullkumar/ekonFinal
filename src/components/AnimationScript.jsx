@@ -30,13 +30,14 @@ export default function AnimationScript() {
     gsap.ticker.lagSmoothing(0);
 
     // ============================================
-    // PORTFOLIO HEADING - SMOOTH HORIZONTAL MOVEMENT
+    // PORTFOLIO HEADING - SMOOTH HORIZONTAL MOVEMENT WITH SQUEEZE
     // ============================================
     const portfolioText = document.querySelector('.portfolio-text');
 
     if (portfolioText) {
       gsap.to(portfolioText, {
-        x: '16vw',
+        x: '19vw',
+        scale: 0.75,  // Shrinks to 75% of original size
         scrollTrigger: {
           trigger: '.whitespace.w-1',
           start: 'top top',
@@ -46,6 +47,7 @@ export default function AnimationScript() {
         }
       });
     }
+
 
     // Split digits
     function splitTextIntoSpans(selector) {
@@ -186,7 +188,7 @@ export default function AnimationScript() {
 
     if (indicator && names.length > 0 && projects.length > 0) {
       gsap.set(indicator, { top: "0px" });
-      
+
       // Ensure first name is active on load
       if (names[0]) {
         names[0].classList.add("active");
@@ -206,7 +208,7 @@ export default function AnimationScript() {
                 duration: 0.3,
                 ease: "power2.out",
               });
-              
+
               // Update active state
               names.forEach((name, i) => {
                 if (i === index) {
@@ -226,7 +228,7 @@ export default function AnimationScript() {
                 duration: 0.3,
                 ease: "power2.out",
               });
-              
+
               // Update active state
               names.forEach((name, i) => {
                 if (i === index - 1) {
