@@ -37,7 +37,7 @@ export default function AnimationScript() {
     if (portfolioText) {
       gsap.to(portfolioText, {
         x: '19vw',
-        scale: 0.75,  // Shrinks to 75% of original size
+        scale: 0.75,
         scrollTrigger: {
           trigger: '.whitespace.w-1',
           start: 'top top',
@@ -47,7 +47,6 @@ export default function AnimationScript() {
         }
       });
     }
-
 
     // Split digits
     function splitTextIntoSpans(selector) {
@@ -72,8 +71,7 @@ export default function AnimationScript() {
 
     // Populate gallery
     const imagesPerProject = 6;
-    const totalImages = 50;
-    let imageIndex = 1;
+    let imageIndex = 0;
 
     function populateGallery() {
       const imageContainers = document.querySelectorAll(".images");
@@ -90,14 +88,87 @@ export default function AnimationScript() {
         '/assets/img6.webp',
         '/assets/video8.mp4',
         '/assets/img7.webp',
+        // new assets
+        '/assets/img8.webp',
+        '/assets/img9.webp',
+        '/assets/img10.webp',
+        // '/assets/video10.mp4',
+        '/assets/video11.mp4',
+        '/assets/img11.webp',
+        '/assets/img12.webp',
+
+        '/assets/img13.webp',
+        '/assets/video12.mp4',
+        '/assets/img14.avif',
+        '/assets/video13.mp4',
+        '/assets/img15.png',
+        '/assets/img16.jpg',
+
+        '/assets/img17.webp',
+        '/assets/img18.webp',
+        '/assets/img19.webp',
+        '/assets/img20.webp',
+        '/assets/img21.avif',
+        '/assets/img22.jpg',
+        
+        //email automation
+        '/assets/img23.webp',  //https://www.saleshandy.com/
+        '/assets/img24.webp', 
+        '/assets/img25.webp', 
+        '/assets/img26.webp', 
+        '/assets/img27.webp', 
+        '/assets/img28.webp', 
+
+        // consulting
+        '/assets/img29.jpg',
+        '/assets/img30.webp',
+        '/assets/video14.mp4',
+        '/assets/img31.jpg',
+        '/assets/img32.avif',
+        '/assets/img33.avif',
+
+        // cloud and tech
+        '/assets/img34.avif',
+        '/assets/img35.avif',
+        '/assets/img36.avif',
+        '/assets/img37.avif',
+        '/assets/img38.avif',
+        '/assets/img39.avif',
+
+        // smm
+        '/assets/video15.mp4',
+        '/assets/img40.png',
+        '/assets/video16.mp4',
+        '/assets/img41.webp',
+        '/assets/video17.mp4',
+        '/assets/img42.webp',
+
+        // app
+        '/assets/video21.mp4',
+        '/assets/img43.webp',
+        '/assets/img44.avif',
+        '/assets/video18.mp4',
+        '/assets/video19.mp4',
+        '/assets/video20.mp4',
+
+        // ai
+        '/assets/video22.mp4',
+        '/assets/img45.png',
+        '/assets/img46.png',
+        '/assets/video23.mp4',
+        '/assets/video24.mp4',
+        '/assets/img47.jpg',
       ];
 
       imageContainers.forEach((container) => {
         for (let j = 0; j < imagesPerProject; j++) {
-          if (imageIndex > totalImages) imageIndex = 1;
+          if (imageIndex >= mediaFiles.length) {
+            imageIndex = 0;
+          }
+          
           const mediaContainer = document.createElement("div");
           mediaContainer.classList.add("img");
-          const currentFile = mediaFiles[imageIndex - 1] || `/assets/img${imageIndex}.webp`;
+          const currentFile = mediaFiles[imageIndex];
 
           if (isVideo(currentFile)) {
             const video = document.createElement("video");
@@ -113,7 +184,7 @@ export default function AnimationScript() {
           } else {
             const img = document.createElement("img");
             img.src = currentFile;
-            img.alt = `Project Image ${imageIndex}`;
+            img.alt = `Project Image ${imageIndex + 1}`;
             mediaContainer.appendChild(img);
           }
           container.appendChild(mediaContainer);
