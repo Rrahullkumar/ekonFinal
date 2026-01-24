@@ -112,73 +112,74 @@ export default function AnimationScript() {
     function populateGallery() {
       const imageContainers = document.querySelectorAll('.images');
 
+      // ✅ Each asset has its own link (edit href later)
       const mediaFiles = [
-        '/assets/video2.mp4',
-        '/assets/img1.webp',
-        '/assets/video1.mp4',
-        '/assets/img3.webp',
-        '/assets/video4.mp4',
-        '/assets/video5.mp4',
-        '/assets/video6.mp4',
-        '/assets/video7.mp4',
-        '/assets/img5.webp',
-        '/assets/img6.webp',
-        '/assets/video8.mp4',
-        '/assets/img7.webp',
-        '/assets/img8.webp',
-        '/assets/img9.webp',
-        '/assets/img10.webp',
-        '/assets/video11.mp4',
-        '/assets/img11.webp',
-        '/assets/img12.webp',
-        '/assets/img13.webp',
-        '/assets/video12.mp4',
-        '/assets/img14.avif',
-        '/assets/video13.mp4',
-        '/assets/img15.png',
-        '/assets/img16.jpg',
-        '/assets/img17.webp',
-        '/assets/img18.webp',
-        '/assets/img19.webp',
-        '/assets/img20.webp',
-        '/assets/img21.avif',
-        '/assets/img22.jpg',
-        '/assets/img23.webp',
-        '/assets/img24.webp',
-        '/assets/img25.webp',
-        '/assets/img26.webp',
-        '/assets/img27.webp',
-        '/assets/img28.webp',
-        '/assets/img29.jpg',
-        '/assets/img30.webp',
-        '/assets/video14.mp4',
-        '/assets/img31.jpg',
-        '/assets/img32.avif',
-        '/assets/img33.avif',
-        '/assets/img34.avif',
-        '/assets/img35.avif',
-        '/assets/img36.avif',
-        '/assets/img37.avif',
-        '/assets/img38.avif',
-        '/assets/img39.avif',
-        '/assets/video15.mp4',
-        '/assets/img40.png',
-        '/assets/video16.mp4',
-        '/assets/img41.webp',
-        '/assets/video17.mp4',
-        '/assets/img42.webp',
-        '/assets/video21.mp4',
-        '/assets/img43.webp',
-        '/assets/img44.avif',
-        '/assets/video18.mp4',
-        '/assets/video19.mp4',
-        '/assets/video20.mp4',
-        '/assets/video22.mp4',
-        '/assets/img45.png',
-        '/assets/img46.png',
-        '/assets/video23.mp4',
-        '/assets/video24.mp4',
-        '/assets/img47.jpg',
+        { src: '/assets/video2.mp4', href: 'https://google.com' },
+        { src: '/assets/img1.webp', href: 'https://google.com' },
+        { src: '/assets/video1.mp4', href: 'https://google.com' },
+        { src: '/assets/img3.webp', href: 'https://google.com' },
+        { src: '/assets/video4.mp4', href: 'https://google.com' },
+        { src: '/assets/video5.mp4', href: 'https://google.com' },
+        { src: '/assets/video6.mp4', href: 'https://google.com' },
+        { src: '/assets/video7.mp4', href: 'https://google.com' },
+        { src: '/assets/img5.webp', href: 'https://google.com' },
+        { src: '/assets/img6.webp', href: 'https://google.com' },
+        { src: '/assets/video8.mp4', href: 'https://google.com' },
+        { src: '/assets/img7.webp', href: 'https://google.com' },
+        { src: '/assets/img8.webp', href: 'https://google.com' },
+        { src: '/assets/img9.webp', href: 'https://google.com' },
+        { src: '/assets/img10.webp', href: 'https://google.com' },
+        { src: '/assets/video11.mp4', href: 'https://google.com' },
+        { src: '/assets/img11.webp', href: 'https://google.com' },
+        { src: '/assets/img12.webp', href: 'https://google.com' },
+        { src: '/assets/img13.webp', href: 'https://google.com' },
+        { src: '/assets/video12.mp4', href: 'https://google.com' },
+        { src: '/assets/img14.avif', href: 'https://google.com' },
+        { src: '/assets/video13.mp4', href: 'https://google.com' },
+        { src: '/assets/img15.png', href: 'https://google.com' },
+        { src: '/assets/img16.jpg', href: 'https://google.com' },
+        { src: '/assets/img17.webp', href: 'https://google.com' },
+        { src: '/assets/img18.webp', href: 'https://google.com' },
+        { src: '/assets/img19.webp', href: 'https://google.com' },
+        { src: '/assets/img20.webp', href: 'https://google.com' },
+        { src: '/assets/img21.avif', href: 'https://google.com' },
+        { src: '/assets/img22.jpg', href: 'https://google.com' },
+        { src: '/assets/img23.webp', href: 'https://google.com' },
+        { src: '/assets/img24.webp', href: 'https://google.com' },
+        { src: '/assets/img25.webp', href: 'https://google.com' },
+        { src: '/assets/img26.webp', href: 'https://google.com' },
+        { src: '/assets/img27.webp', href: 'https://google.com' },
+        { src: '/assets/img28.webp', href: 'https://google.com' },
+        { src: '/assets/img29.jpg', href: 'https://google.com' },
+        { src: '/assets/img30.webp', href: 'https://google.com' },
+        { src: '/assets/video14.mp4', href: 'https://google.com' },
+        { src: '/assets/img31.jpg', href: 'https://google.com' },
+        { src: '/assets/img32.avif', href: 'https://google.com' },
+        { src: '/assets/img33.avif', href: 'https://google.com' },
+        { src: '/assets/img34.avif', href: 'https://google.com' },
+        { src: '/assets/img35.avif', href: 'https://google.com' },
+        { src: '/assets/img36.avif', href: 'https://google.com' },
+        { src: '/assets/img37.avif', href: 'https://google.com' },
+        { src: '/assets/img38.avif', href: 'https://google.com' },
+        { src: '/assets/img39.avif', href: 'https://google.com' },
+        { src: '/assets/video15.mp4', href: 'https://google.com' },
+        { src: '/assets/img40.png', href: 'https://google.com' },
+        { src: '/assets/video16.mp4', href: 'https://google.com' },
+        { src: '/assets/img41.webp', href: 'https://google.com' },
+        { src: '/assets/video17.mp4', href: 'https://google.com' },
+        { src: '/assets/img42.webp', href: 'https://google.com' },
+        { src: '/assets/video21.mp4', href: 'https://google.com' },
+        { src: '/assets/img43.webp', href: 'https://google.com' },
+        { src: '/assets/img44.avif', href: 'https://google.com' },
+        { src: '/assets/video18.mp4', href: 'https://google.com' },
+        { src: '/assets/video19.mp4', href: 'https://google.com' },
+        { src: '/assets/video20.mp4', href: 'https://google.com' },
+        { src: '/assets/video22.mp4', href: 'https://google.com' },
+        { src: '/assets/img45.png', href: 'https://google.com' },
+        { src: '/assets/img46.png', href: 'https://google.com' },
+        { src: '/assets/video23.mp4', href: 'https://google.com' },
+        { src: '/assets/video24.mp4', href: 'https://google.com' },
+        { src: '/assets/img47.jpg', href: 'https://google.com' },
       ];
 
       imageContainers.forEach((container) => {
@@ -188,20 +189,30 @@ export default function AnimationScript() {
           const mediaContainer = document.createElement('div');
           mediaContainer.classList.add('img');
 
-          const currentFile = mediaFiles[imageIndex];
+          const { src, href } = mediaFiles[imageIndex];
 
-          if (isVideo(currentFile)) {
-            const video = createVideoElement(currentFile);
-            mediaContainer.appendChild(video);
+          // ✅ Link wrapper per asset
+          const link = document.createElement('a');
+          link.href = href;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.style.display = 'block';
+          link.style.width = '100%';
+          link.style.height = '100%';
+
+          if (isVideo(src)) {
+            const video = createVideoElement(src);
+            link.appendChild(video);
           } else {
             const img = document.createElement('img');
-            img.src = currentFile;
+            img.src = src;
             img.alt = `Project Image ${imageIndex + 1}`;
             img.loading = 'lazy';
             img.decoding = 'async';
-            mediaContainer.appendChild(img);
+            link.appendChild(img);
           }
 
+          mediaContainer.appendChild(link);
           container.appendChild(mediaContainer);
           imageIndex++;
         }
@@ -224,18 +235,9 @@ export default function AnimationScript() {
     );
     document.querySelectorAll('.img video').forEach((v) => warmObserver.observe(v));
 
-    // =========================
     // Mobile-only: fade in/out gallery tiles
-    // =========================
     if (isSmall) {
-      // ensure heading text doesn't keep any GSAP transforms on mobile
-      if (portfolioText) {
-        gsap.killTweensOf(portfolioText);
-        gsap.set(portfolioText, { clearProps: 'transform' });
-      }
-
       const tiles = gsap.utils.toArray('.images .img');
-
       tiles.forEach((tile) => {
         gsap.set(tile, { autoAlpha: 0.12, y: 14, scale: 0.985 });
 
@@ -297,7 +299,7 @@ export default function AnimationScript() {
       },
     });
 
-    // Preview update
+    // Preview update (still works; preview is hidden on mobile via CSS)
     const previewContainer = document.querySelector('.preview-img');
     const mediaElements = document.querySelectorAll('.img img, .img video');
 
