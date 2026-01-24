@@ -1,300 +1,339 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap'); */
-
 @import url('https://fonts.cdnfonts.com/css/satoshi');
-/* @import url('https://fonts.cdnfonts.com/css/outfit'); */
-
 @import "tailwindcss";
 
-::-webkit-scrollbar {
-    display: none;
-}
+::-webkit-scrollbar { display: none; }
 
-/* FIXED: Don't reset padding/margin on ALL elements */
+/* Reset */
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
-    background-color: #000;
-    font-family: 'satoshi';
+  background-color: #000;
+  font-family: 'satoshi';
 }
 
-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* Media elements */
+img, video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 h1 {
-    /* font-family: "Circular Std"; */
-    font-weight: 500;
-    font-size: 58px;
+  font-weight: 500;
+  font-size: 58px;
 }
 
 p, a {
- text-decoration: none;
- text-transform: uppercase;
- /* font-family: "Circular std"; */
- font-size: 14px;
- font-weight: 500;
- color: white;
- transition: color 0.3s;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  transition: color 0.3s;
 }
 
+/* =========================
+   Desktop (original layout)
+   ========================= */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    padding:2rem;
-    display: flex;
-    justify-content: space-between;
-    z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
 }
 
 .nav-items {
-    position: fixed;
-    top: 2em;
-    left: 40%;
-    display: flex;
-    gap: 0.25em;
-    z-index: 100;
+  position: fixed;
+  top: 2em;
+  left: 40%;
+  display: flex;
+  gap: 0.25em;
+  z-index: 100;
 }
 
-nav a, .nav-items a {
-    text-transform: none;
-}
+nav a, .nav-items a { text-transform: none; }
 
-.whitespace.w-1 {
-    width: 100vw;
-    height: 50vh;
-}
-
-.whitespace.w-2 {
-    width: 100vw;
-    height: 45vh;
-}
+.whitespace.w-1 { width: 100vw; height: 50vh; }
+.whitespace.w-2 { width: 100vw; height: 45vh; }
 
 .gallery {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20em;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20em;
 }
 
 .project {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
 }
 
 .index {
-    flex: 1;
-    padding-left: 2em;
-    height: 0;
+  flex: 1;
+  padding-left: 2em;
+  height: 0;
 }
 
 .images {
-    flex: 6;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    height: 100vh;
-}
-
-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.img video {
-    opacity: 0.9;
-}
-
-.preview-img video {
-    opacity: 0.9;
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  height: 100vh;
 }
 
 .img {
-    flex: 1;
-    width: 200px;
-    background-color: white;
-    overflow: hidden;
+  flex: 1;
+  width: 200px;
+  background-color: white;
+  overflow: hidden;
 }
 
-.img img {
-    opacity: 0.9;
+.img img,
+.img video,
+.preview-img video {
+  opacity: 0.9;
 }
 
 .index .mask {
-    position: absolute;
-    top: 0;
-    left: 2em;
-    height: 70px;
-    overflow: hidden;
-    will-change: transform;
+  position: absolute;
+  top: 0;
+  left: 2em;
+  height: 70px;
+  overflow: hidden;
+  will-change: transform;
 }
 
-.index .mask .h1 {
-    position: relative;
-    will-change: transform;
-}
-
-.index .mask h1 span {
-    position: relative;
-    display: inline-block;
-    will-change: transform;
-}
+.index .mask .h1 { position: relative; will-change: transform; }
+.index .mask h1 span { position: relative; display: inline-block; will-change: transform; }
 
 .digit-wrapper, .digit-wrapper span {
-    display: inline-block;
-    position: relative;
-    will-change: transform;
-    color: aliceblue;
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+  color: aliceblue;
 }
 
+/* fixed UI elements */
 .project-names {
-    position: fixed;
-    width: 200px;
-    top: 50vh;
-    left: 40%;
-    transform: translateX(0%);
-    z-index: 50;
+  position: fixed;
+  width: 200px;
+  top: 50vh;
+  left: 40%;
+  transform: translateX(0%);
+  z-index: 50;
 }
 
 .indicator {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    will-change: transform;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
 }
 
 .symbol {
-    width: 12px;
-    height: 12px;
-    background-color: green;
-    clip-path: polygon(0 50%, 100% 100%, 100% 0);
+  width: 12px;
+  height: 12px;
+  background-color: green;
+  clip-path: polygon(0 50%, 100% 100%, 100% 0);
 }
 
-.name p {
-    color: gray;
-}
-
-.name.active p {
-    color: lightblue;
-}
+.name p { color: gray; }
+.name.active p { color: lightblue; }
 
 .preview-img {
-    position: fixed;
-    bottom: 2em;
-    right: 2em;
-    max-width: 40vw;
-    height: calc(50vh - 2em);
-    opacity: 0.9;
-    z-index: 40;
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  max-width: 40vw;
+  height: calc(50vh - 2em);
+  opacity: 0.9;
+  z-index: 40;
+  overflow: hidden;
 }
 
 .progress-bar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 8px;
-    height: 100vh;
-    background-color:lightblue;
-    transform: scaleY(0);
-    transform-origin: top;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100vh;
+  background-color: lightblue;
+  transform: scaleY(0);
+  transform-origin: top;
 }
 
 .footer p {
-    position: fixed;
-    bottom: 2em;
-    left: 40%;
-    text-transform: none;
-    z-index: 100;
+  position: fixed;
+  bottom: 2em;
+  left: 40%;
+  text-transform: none;
+  z-index: 100;
 }
 
-/* ============================================
-   PORTFOLIO HEADING
-============================================ */
+/* Portfolio heading */
 .portfolio-heading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;       /* stays 100vw */
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
 }
 
 .portfolio-text {
-    /* font-size: clamp(80px, 12vw, 180px); */
-    font-size: clamp(100px, 15vw, 220px);
-    font-weight: 400;
-    color: rgba(229, 30, 8, 0.84);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    font-style: italic;
-    will-change: transform;
-    transform: scaleX(1.2);
+  font-size: clamp(100px, 15vw, 220px);
+  font-weight: 400;
+  color: rgba(229, 30, 8, 0.84);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-style: bold;
+  will-change: transform;
+  transform: scaleX(1.2);
 }
 
-/* ============================================
-   ANIMATIONS
-============================================ */
+/* Animations */
 @keyframes slideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
+  0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-slideUp { animation: slideUp 0.3s ease-out; }
+
+/* =========================================================
+   Responsive UI-frame layout (ONLY for small screens)
+   ========================================================= */
+@media (max-width: 900px) {
+  :root{
+    --safe-pad: clamp(12px, 2.6vw, 20px);
+    --top-ui-h: clamp(100px, 18vh, 175px);
+    --bottom-ui-h: clamp(90px, 14vh, 150px);
+
+    --left-rail-w: clamp(86px, 18vw, 150px);
+    --gap: clamp(10px, 2vw, 18px);
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+
+  /* FIX: heading not cut + always readable */
+  .portfolio-heading{
+    height: var(--top-ui-h);
+    width: 100vw;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    /* extra top padding so first letters never clip */
+    /* padding: calc(var(--safe-pad) + 6px) var(--safe-pad) var(--safe-pad); */
+    z-index: 200;
+    pointer-events: none;
+
+    /* IMPORTANT: do not clip the text */
+    overflow: visible;
+  }
+
+  .portfolio-text{
+    font-size: clamp(44px, 9vw, 120px);
+    line-height: 1.1;          /* helps prevent top clipping */
+    transform: none;            /* don’t scaleX on mobile; avoids cropping */
+    white-space: nowrap;
+  }
+
+  /* Preview hidden on mobile (your choice) */
+  .preview-img{ display: none; }
+
+  .progress-bar{
+    top: var(--top-ui-h);
+    height: calc(100vh - var(--top-ui-h) - var(--bottom-ui-h));
+    width: 6px;
+    z-index: 210;
+  }
+
+  .project-names{
+    left: var(--safe-pad);
+    top: auto;
+    bottom: var(--safe-pad);
+    width: calc(100vw - (var(--safe-pad) * 2) - 10px);
+    max-width: none;
+    z-index: 210;
+  }
+
+  .footer p{
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(var(--bottom-ui-h) + var(--safe-pad));
+    z-index: 210;
+  }
+
+  /* IMPORTANT: reserve top space so gallery never goes behind heading */
+  .gallery{
+    gap: clamp(8em, 10vw, 12em);
+    padding-top: var(--top-ui-h);
+    padding-bottom: var(--bottom-ui-h);
+  }
+
+  /* Keep horizontal project layout */
+  .project{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .index{
+    flex: 0 0 var(--left-rail-w);
+    padding-left: var(--safe-pad);
+  }
+
+  .index .mask{
+    left: var(--safe-pad);
+    height: clamp(54px, 7vw, 70px);
+  }
+
+  .images{
+    flex: 1;
+    height: 100vh;
+    padding-left: var(--gap);
+    padding-right: calc(var(--safe-pad) + 12px);
+  }
+
+  .img{ width: 100%; }
+
+  /* Mobile fade base state (JS will animate) */
+  .images .img{
+    opacity: 0.12;
+    transform: translateY(14px) scale(0.985);
+    transition: opacity 0.2s linear, transform 0.2s linear;
+    will-change: opacity, transform;
   }
 }
 
-.animate-slideUp {
-  animation: slideUp 0.3s ease-out;
-}
+@media (max-width: 480px) {
+  :root{
+    --top-ui-h: clamp(105px, 19vh, 165px);
+    --bottom-ui-h: clamp(100px, 16vh, 165px);
+    --left-rail-w: clamp(78px, 20vw, 130px);
+  }
 
-@media (max-width: 1000px) {
-    .nav-items,
-    .footer p {
-        left: 60%;
-    }
-
-    .index {
-        flex: 1.5;
-    }
-
-    .project-names {
-        left: 60%;
-    }
-
-    .preview-img {
-        top: 6em;
-        width: calc(45% - 4em);
-        height: calc(50vh - 8em);
-    }
-    
-    .portfolio-text {
-        font-size: clamp(60px, 10vw, 120px);
-    }
+  h1 { font-size: 46px; }
+  p, a { font-size: 12px; }
 }
