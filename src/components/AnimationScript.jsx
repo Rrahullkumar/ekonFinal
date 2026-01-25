@@ -21,6 +21,16 @@ export default function AnimationScript() {
 
     gsap.registerPlugin(ScrollTrigger);
 
+    // 🔥 CHECK IF MOBILE - SKIP DESKTOP CODE
+    const isSmall = window.matchMedia('(max-width: 900px)').matches;
+    
+    if (isSmall) {
+      console.log('Mobile detected - Desktop AnimationScript skipped');
+      return; // EXIT EARLY - Let AnimationScriptMobile handle everything
+    }
+
+    // ====== DESKTOP CODE ONLY BELOW THIS LINE ======
+
     // Lenis
     const lenis = new Lenis();
     lenis.on('scroll', ScrollTrigger.update);
@@ -29,16 +39,8 @@ export default function AnimationScript() {
 
     // Portfolio heading animation
     const portfolioText = document.querySelector('.portfolio-text');
-    const isSmall = window.matchMedia('(max-width: 900px)').matches;
 
-    // FIX: on small screens, remove any transforms so CSS can control placement
-    if (portfolioText && isSmall) {
-      gsap.killTweensOf(portfolioText);
-      gsap.set(portfolioText, { clearProps: 'transform' });
-    }
-
-    // Desktop: keep your original movement
-    if (portfolioText && !isSmall) {
+    if (portfolioText) {
       gsap.to(portfolioText, {
         x: '19vw',
         scale: 0.75,
@@ -92,7 +94,6 @@ export default function AnimationScript() {
       video.autoplay = true;
       video.loop = true;
       video.playsInline = true;
-
       video.preload = 'auto';
 
       video.setAttribute('playsinline', '');
@@ -112,7 +113,6 @@ export default function AnimationScript() {
     function populateGallery() {
       const imageContainers = document.querySelectorAll('.images');
 
-      // ✅ Each asset has its own link (edit href later)
       const mediaFiles = [
         // webdev
         { src: '/assets/video2.mp4', href: 'https://google.com' },
@@ -212,7 +212,6 @@ export default function AnimationScript() {
 
           const { src, href } = mediaFiles[imageIndex];
 
-          // ✅ Link wrapper per asset
           const link = document.createElement('a');
           link.href = href;
           link.target = '_blank';
@@ -256,60 +255,6 @@ export default function AnimationScript() {
     );
     document.querySelectorAll('.img video').forEach((v) => warmObserver.observe(v));
 
-    // Mobile-only: fade in/out gallery tiles
-    if (isSmall) {
-      const tiles = gsap.utils.toArray('.images .img');
-      tiles.forEach((tile) => {
-        gsap.set(tile, { autoAlpha: 0.12, y: 14, scale: 0.985 });
-
-        ScrollTrigger.create({
-          trigger: tile,
-          start: 'top 65%',
-          end: 'bottom 40%',
-          onEnter: () => {
-            gsap.to(tile, {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.35,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-          },
-          onEnterBack: () => {
-            gsap.to(tile, {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.35,
-              ease: 'power2.out',
-              overwrite: true,
-            });
-          },
-          onLeave: () => {
-            gsap.to(tile, {
-              autoAlpha: 0,
-              y: -10,
-              scale: 0.985,
-              duration: 0.25,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-          },
-          onLeaveBack: () => {
-            gsap.to(tile, {
-              autoAlpha: 0,
-              y: 14,
-              scale: 0.985,
-              duration: 0.25,
-              ease: 'power2.in',
-              overwrite: true,
-            });
-          },
-        });
-      });
-    }
-
     // Progress bar
     ScrollTrigger.create({
       trigger: 'body',
@@ -320,7 +265,7 @@ export default function AnimationScript() {
       },
     });
 
-    // Preview update (still works; preview is hidden on mobile via CSS)
+    // Preview update
     const previewContainer = document.querySelector('.preview-img');
     const mediaElements = document.querySelectorAll('.img img, .img video');
 
