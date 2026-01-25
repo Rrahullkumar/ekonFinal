@@ -114,66 +114,87 @@ export default function AnimationScript() {
 
       // ✅ Each asset has its own link (edit href later)
       const mediaFiles = [
+        // webdev
         { src: '/assets/video2.mp4', href: 'https://google.com' },
         { src: '/assets/img1.webp', href: 'https://google.com' },
         { src: '/assets/video1.mp4', href: 'https://google.com' },
         { src: '/assets/img3.webp', href: 'https://google.com' },
         { src: '/assets/video4.mp4', href: 'https://google.com' },
         { src: '/assets/video5.mp4', href: 'https://google.com' },
+
+        // content creation
         { src: '/assets/video6.mp4', href: 'https://google.com' },
         { src: '/assets/video7.mp4', href: 'https://google.com' },
         { src: '/assets/img5.webp', href: 'https://google.com' },
         { src: '/assets/img6.webp', href: 'https://google.com' },
         { src: '/assets/video8.mp4', href: 'https://google.com' },
         { src: '/assets/img7.webp', href: 'https://google.com' },
+
+        // seo
         { src: '/assets/img8.webp', href: 'https://google.com' },
         { src: '/assets/img9.webp', href: 'https://google.com' },
         { src: '/assets/img10.webp', href: 'https://google.com' },
         { src: '/assets/video11.mp4', href: 'https://google.com' },
         { src: '/assets/img11.webp', href: 'https://google.com' },
         { src: '/assets/img12.webp', href: 'https://google.com' },
+
+        // branding
         { src: '/assets/img13.webp', href: 'https://google.com' },
         { src: '/assets/video12.mp4', href: 'https://google.com' },
         { src: '/assets/img14.avif', href: 'https://google.com' },
         { src: '/assets/video13.mp4', href: 'https://google.com' },
         { src: '/assets/img15.png', href: 'https://google.com' },
         { src: '/assets/img16.jpg', href: 'https://google.com' },
+
+        // digital marketing
         { src: '/assets/img17.webp', href: 'https://google.com' },
-        { src: '/assets/img18.webp', href: 'https://google.com' },
+        { src: '/assets/video26.mp4', href: 'https://google.com' },
         { src: '/assets/img19.webp', href: 'https://google.com' },
         { src: '/assets/img20.webp', href: 'https://google.com' },
-        { src: '/assets/img21.avif', href: 'https://google.com' },
+        { src: '/assets/video25.mp4', href: 'https://google.com' },
         { src: '/assets/img22.jpg', href: 'https://google.com' },
+
+        // e-mail automation
         { src: '/assets/img23.webp', href: 'https://google.com' },
         { src: '/assets/img24.webp', href: 'https://google.com' },
         { src: '/assets/img25.webp', href: 'https://google.com' },
         { src: '/assets/img26.webp', href: 'https://google.com' },
         { src: '/assets/img27.webp', href: 'https://google.com' },
         { src: '/assets/img28.webp', href: 'https://google.com' },
+
+        // consulting
         { src: '/assets/img29.jpg', href: 'https://google.com' },
         { src: '/assets/img30.webp', href: 'https://google.com' },
         { src: '/assets/video14.mp4', href: 'https://google.com' },
         { src: '/assets/img31.jpg', href: 'https://google.com' },
         { src: '/assets/img32.avif', href: 'https://google.com' },
         { src: '/assets/img33.avif', href: 'https://google.com' },
+
+        // tech and cloud
         { src: '/assets/img34.avif', href: 'https://google.com' },
         { src: '/assets/img35.avif', href: 'https://google.com' },
         { src: '/assets/img36.avif', href: 'https://google.com' },
         { src: '/assets/img37.avif', href: 'https://google.com' },
         { src: '/assets/img38.avif', href: 'https://google.com' },
         { src: '/assets/img39.avif', href: 'https://google.com' },
+
+        // smm
         { src: '/assets/video15.mp4', href: 'https://google.com' },
         { src: '/assets/img40.png', href: 'https://google.com' },
         { src: '/assets/video16.mp4', href: 'https://google.com' },
         { src: '/assets/img41.webp', href: 'https://google.com' },
         { src: '/assets/video17.mp4', href: 'https://google.com' },
         { src: '/assets/img42.webp', href: 'https://google.com' },
+
+        // app dev
         { src: '/assets/video21.mp4', href: 'https://google.com' },
         { src: '/assets/img43.webp', href: 'https://google.com' },
         { src: '/assets/img44.avif', href: 'https://google.com' },
         { src: '/assets/video18.mp4', href: 'https://google.com' },
         { src: '/assets/video19.mp4', href: 'https://google.com' },
         { src: '/assets/video20.mp4', href: 'https://google.com' },
+
+        // ai
         { src: '/assets/video22.mp4', href: 'https://google.com' },
         { src: '/assets/img45.png', href: 'https://google.com' },
         { src: '/assets/img46.png', href: 'https://google.com' },
