@@ -140,13 +140,38 @@ export default function GalleryMobile() {
 
   const formatNumber = (num) => String(num).padStart(2, '0');
 
-  // Force initial visibility after mount
+  // Handle click vs scroll on links
   useEffect(() => {
-    const images = document.querySelectorAll('.img-mobile');
-    images.forEach(img => {
-      img.style.opacity = '1';
-      img.style.transform = 'none';
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e) => {
+      touchEndY = e.changedTouches[0].clientY;
+      const distance = Math.abs(touchEndY - touchStartY);
+      
+      // If moved more than 10px, it's a scroll, prevent link click
+      if (distance > 10) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    const links = document.querySelectorAll('.img-mobile a');
+    links.forEach(link => {
+      link.addEventListener('touchstart', handleTouchStart, { passive: false });
+      link.addEventListener('touchend', handleTouchEnd, { passive: false });
     });
+
+    return () => {
+      links.forEach(link => {
+        link.removeEventListener('touchstart', handleTouchStart);
+        link.removeEventListener('touchend', handleTouchEnd);
+      });
+    };
   }, []);
 
   return (
@@ -178,18 +203,21 @@ export default function GalleryMobile() {
                   background: 'rgba(20, 20, 20, 1)',
                   position: 'relative',
                   opacity: 1,
-                  transform: 'translateY(0)'
+                  transform: 'translateY(0)',
+                  touchAction: 'pan-y', // Allow vertical scrolling
                 }}
               >
                 <a 
                   href={item.href} 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  className="media-link-mobile"
                   style={{
                     display: 'block',
                     width: '100%',
                     height: '100%',
-                    position: 'relative'
+                    position: 'relative',
+                    touchAction: 'pan-y', // Allow vertical scroll on links
                   }}
                 >
                   {item.type === 'video' ? (
@@ -205,7 +233,8 @@ export default function GalleryMobile() {
                         height: '100%',
                         objectFit: 'cover',
                         display: 'block',
-                        background: '#000'
+                        background: '#000',
+                        pointerEvents: 'none', // Allow scroll through video
                       }}
                     />
                   ) : (
@@ -219,8 +248,10 @@ export default function GalleryMobile() {
                         height: '100%',
                         objectFit: 'cover',
                         display: 'block',
-                        background: '#000'
+                        background: '#000',
+                        pointerEvents: 'none', // Allow scroll through image
                       }}
+                      draggable="false"
                     />
                   )}
                 </a>
