@@ -20,20 +20,16 @@ export default function AnimationScriptMobile() {
     
     gsap.registerPlugin(ScrollTrigger);
 
-    // ❌ REMOVE LENIS ON MOBILE - It causes laggy/erratic scrolling
-    // Use native mobile scroll instead for better performance
-
-    // Helper function for safe video play
-    function safePlay(video) {
-      if (!video) return;
-      const p = video.play();
-      if (p && typeof p.catch === 'function') p.catch(() => {});
-    }
-
-    // Configure ScrollTrigger for mobile optimization
+    // CRITICAL: Configure ScrollTrigger to NOT block mobile scroll
     ScrollTrigger.config({
       autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
-      ignoreMobileResize: true, // Prevent issues on mobile address bar hide/show
+      ignoreMobileResize: true,
+      limitCallbacks: true, // Improve performance
+    });
+
+    // CRITICAL: Set default scroller to window and allow native scroll
+    ScrollTrigger.defaults({
+      scroller: window,
     });
 
     // Progress bar animation
@@ -46,35 +42,21 @@ export default function AnimationScriptMobile() {
           trigger: '.gallery-mobile',
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 0.5, // Increased from 0.3 for smoother mobile performance
+          scrub: 1,
           invalidateOnRefresh: true,
         }
       });
     }
-
-    // Warm-up videos in advance
-    const warmObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const video = entry.target;
-          video.preload = 'auto';
-          safePlay(video);
-        });
-      },
-      { root: null, rootMargin: '400px 0px', threshold: 0.01 }
-    );
 
     // Project animations
     const projects = document.querySelectorAll('.project-mobile');
     
     projects.forEach((project, index) => {
       const maskEl = project.querySelector('.mask-mobile');
-      const images = project.querySelectorAll('.img-mobile');
       const digitFirst = project.querySelector('.digit-first');
       const digitSecond = project.querySelector('.digit-second');
 
-      // Pin the MASK (digit wrapper)
+      // Pin the MASK (digit wrapper) - OPTIMIZED
       if (maskEl) {
         ScrollTrigger.create({
           trigger: project,
@@ -85,66 +67,14 @@ export default function AnimationScriptMobile() {
           pinType: 'fixed',
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          // CRITICAL: Don't block scroll
+          onRefresh: () => {
+            // Allow scroll to continue
+          }
         });
       }
 
-      // Animate images on scroll - OPTIMIZED FOR MOBILE
-      images.forEach((img, i) => {
-        // Set initial visible state
-        gsap.set(img, { opacity: 1, y: 0, scale: 1 });
-
-        // Lighter animation for better mobile performance
-        ScrollTrigger.create({
-          trigger: img,
-          start: 'top 90%',
-          end: 'top 60%',
-          scrub: 0.5, // Smoother scrubbing
-          onEnter: () => {
-            gsap.to(img, {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.4,
-              ease: 'power1.out',
-              overwrite: true
-            });
-          },
-          onLeaveBack: () => {
-            gsap.to(img, {
-              opacity: 0.4,
-              y: 20,
-              scale: 0.98,
-              duration: 0.3,
-              ease: 'power1.in',
-              overwrite: true
-            });
-          }
-        });
-
-        // Video playback
-        const video = img.querySelector('video');
-        if (video) {
-          warmObserver.observe(video);
-
-          ScrollTrigger.create({
-            trigger: img,
-            start: 'top 85%',
-            end: 'bottom 15%',
-            onEnter: () => safePlay(video),
-            onLeave: () => {
-              video.pause();
-              video.currentTime = 0; // Reset for better performance
-            },
-            onEnterBack: () => safePlay(video),
-            onLeaveBack: () => {
-              video.pause();
-              video.currentTime = 0;
-            }
-          });
-        }
-      });
-
-      // Animate digits on enter - SIMPLIFIED
+      // Animate digits on enter
       if (digitFirst && digitSecond) {
         ScrollTrigger.create({
           trigger: project,
@@ -207,13 +137,15 @@ export default function AnimationScriptMobile() {
           trigger: letsCollabSection,
           start: 'top center',
           end: 'top top',
-          scrub: 0.5,
+          scrub: 1,
         },
       });
     }
 
-    // Refresh ScrollTrigger after setup
-    ScrollTrigger.refresh();
+    // CRITICAL: Refresh after setup but DON'T lock scroll
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
   };
 
   return null;
