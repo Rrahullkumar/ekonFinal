@@ -20,6 +20,9 @@ export default function AnimationScriptMobile() {
     
     gsap.registerPlugin(ScrollTrigger);
 
+    // ❌ REMOVE LENIS ON MOBILE - It causes laggy/erratic scrolling
+    // Use native mobile scroll instead for better performance
+
     // Helper function for safe video play
     function safePlay(video) {
       if (!video) return;
@@ -27,29 +30,11 @@ export default function AnimationScriptMobile() {
       if (p && typeof p.catch === 'function') p.catch(() => {});
     }
 
-    // Smooth scroll with Lenis if available
-    if (window.Lenis) {
-      const lenis = new window.Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        syncTouch: true,
-      });
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
-      lenis.on('scroll', ScrollTrigger.update);
-      
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
-      
-      gsap.ticker.lagSmoothing(0);
-    }
+    // Configure ScrollTrigger for mobile optimization
+    ScrollTrigger.config({
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+      ignoreMobileResize: true, // Prevent issues on mobile address bar hide/show
+    });
 
     // Progress bar animation
     const progressBar = document.querySelector('.progress-bar-mobile');
@@ -61,7 +46,8 @@ export default function AnimationScriptMobile() {
           trigger: '.gallery-mobile',
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 0.3
+          scrub: 0.5, // Increased from 0.3 for smoother mobile performance
+          invalidateOnRefresh: true,
         }
       });
     }
@@ -76,58 +62,66 @@ export default function AnimationScriptMobile() {
           safePlay(video);
         });
       },
-      { root: null, rootMargin: '600px 0px', threshold: 0.01 }
+      { root: null, rootMargin: '400px 0px', threshold: 0.01 }
     );
 
     // Project animations
     const projects = document.querySelectorAll('.project-mobile');
     
     projects.forEach((project, index) => {
-      const indexEl = project.querySelector('.index-mobile');
       const maskEl = project.querySelector('.mask-mobile');
       const images = project.querySelectorAll('.img-mobile');
       const digitFirst = project.querySelector('.digit-first');
       const digitSecond = project.querySelector('.digit-second');
 
-      // Pin the MASK (digit wrapper) - not the entire index container
+      // Pin the MASK (digit wrapper)
       if (maskEl) {
         ScrollTrigger.create({
           trigger: project,
-          start: 'top 8%', // Start pinning when project reaches 20% from top
-          end: 'bottom 8%', // Unpin when project bottom reaches 20% from top
+          start: 'top 10%',
+          end: 'bottom 10%',
           pin: maskEl,
           pinSpacing: false,
           pinType: 'fixed',
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          markers: false, // Set to true for debugging
         });
       }
 
-      // Animate images on scroll
+      // Animate images on scroll - OPTIMIZED FOR MOBILE
       images.forEach((img, i) => {
         // Set initial visible state
         gsap.set(img, { opacity: 1, y: 0, scale: 1 });
 
-        // Fade animation on scroll
-        gsap.fromTo(img, 
-          { opacity: 0.3, y: 30, scale: 0.96 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: img,
-              start: 'top 85%',
-              end: 'top 50%',
-              scrub: 1,
-              toggleActions: 'play none none reverse'
-            }
+        // Lighter animation for better mobile performance
+        ScrollTrigger.create({
+          trigger: img,
+          start: 'top 90%',
+          end: 'top 60%',
+          scrub: 0.5, // Smoother scrubbing
+          onEnter: () => {
+            gsap.to(img, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.4,
+              ease: 'power1.out',
+              overwrite: true
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(img, {
+              opacity: 0.4,
+              y: 20,
+              scale: 0.98,
+              duration: 0.3,
+              ease: 'power1.in',
+              overwrite: true
+            });
           }
-        );
+        });
 
-        // Video playback and warm-up
+        // Video playback
         const video = img.querySelector('video');
         if (video) {
           warmObserver.observe(video);
@@ -137,31 +131,46 @@ export default function AnimationScriptMobile() {
             start: 'top 85%',
             end: 'bottom 15%',
             onEnter: () => safePlay(video),
-            onLeave: () => video.pause(),
+            onLeave: () => {
+              video.pause();
+              video.currentTime = 0; // Reset for better performance
+            },
             onEnterBack: () => safePlay(video),
-            onLeaveBack: () => video.pause()
+            onLeaveBack: () => {
+              video.pause();
+              video.currentTime = 0;
+            }
           });
         }
       });
 
-      // Animate digits on enter
+      // Animate digits on enter - SIMPLIFIED
       if (digitFirst && digitSecond) {
-        gsap.fromTo(
-          [digitFirst, digitSecond],
-          { y: 100, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-            ease: 'power4.out',
-            scrollTrigger: {
-              trigger: project,
-              start: 'top 50%',
-              toggleActions: 'play none none reverse'
-            }
+        ScrollTrigger.create({
+          trigger: project,
+          start: 'top 50%',
+          onEnter: () => {
+            gsap.fromTo(
+              [digitFirst, digitSecond],
+              { y: 80, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.08,
+                ease: 'power3.out',
+              }
+            );
+          },
+          onLeaveBack: () => {
+            gsap.to([digitFirst, digitSecond], {
+              y: 80,
+              opacity: 0,
+              duration: 0.4,
+              ease: 'power2.in',
+            });
           }
-        );
+        });
       }
 
       // Update active project indicator
@@ -198,12 +207,12 @@ export default function AnimationScriptMobile() {
           trigger: letsCollabSection,
           start: 'top center',
           end: 'top top',
-          scrub: 1,
+          scrub: 0.5,
         },
       });
     }
 
-    // Refresh all ScrollTriggers
+    // Refresh ScrollTrigger after setup
     ScrollTrigger.refresh();
   };
 

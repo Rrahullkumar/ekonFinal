@@ -230,9 +230,29 @@ nav a, .nav-items a { text-transform: none; }
     --safe-pad: clamp(12px, 2.6vw, 20px);
     --top-ui-h: clamp(100px, 18vh, 175px);
     --bottom-ui-h: clamp(90px, 14vh, 150px);
-
     --left-rail-w: clamp(86px, 18vw, 150px);
     --gap: clamp(10px, 2vw, 18px);
+  }
+
+  /* Optimize scrolling performance */
+  html {
+    scroll-behavior: auto; /* Disable smooth scroll, use native */
+    -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: none; /* Prevent bounce effect */
+    max-width: 100vw;
+  }
+
+  /* Optimize animations for mobile */
+  * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   /* FIX: heading not cut + always readable */
@@ -241,24 +261,19 @@ nav a, .nav-items a { text-transform: none; }
     width: 100vw;
     justify-content: flex-start;
     align-items: flex-start;
-
-    /* extra top padding so first letters never clip */
-    /* padding: calc(var(--safe-pad) + 6px) var(--safe-pad) var(--safe-pad); */
     z-index: 200;
     pointer-events: none;
-
-    /* IMPORTANT: do not clip the text */
     overflow: visible;
   }
 
   .portfolio-text{
     font-size: clamp(44px, 9vw, 120px);
-    line-height: 1.1;          /* helps prevent top clipping */
-    transform: none;            /* don’t scaleX on mobile; avoids cropping */
+    line-height: 1.1;
+    transform: none;
     white-space: nowrap;
   }
 
-  /* Preview hidden on mobile (your choice) */
+  /* Preview hidden on mobile */
   .preview-img{ display: none; }
 
   .progress-bar{
@@ -323,7 +338,6 @@ nav a, .nav-items a { text-transform: none; }
     opacity: 0.12;
     transform: translateY(14px) scale(0.985);
     transition: opacity 0.2s linear, transform 0.2s linear;
-    will-change: opacity, transform;
   }
 }
 
@@ -338,20 +352,10 @@ nav a, .nav-items a { text-transform: none; }
   p, a { font-size: 12px; }
 }
 
-
-/* =========================================================
-   MOBILE AESTHETIC REDESIGN
-   ========================================================= */
 /* =========================================================
    MOBILE - COMPLETE FIX
    ========================================================= */
 @media (max-width: 900px) {
-  /* Prevent horizontal overflow */
-  html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-  }
-
   /* Portfolio Heading */
   .portfolio-heading-mobile {
     position: fixed;
@@ -390,12 +394,13 @@ nav a, .nav-items a { text-transform: none; }
     border-radius: 10px;
   }
 
-  /* Project Names - LEFT SIDE BELOW DIGIT */
+  /* Project Names - CENTER LEFT */
   .project-names-mobile {
     position: fixed;
-    left: clamp(8px, 2vw, 16px);
-    top: clamp(140px, 22vh, 180px); /* Below the pinned digit */
-    z-index: 15; /* Below other UI but above content */
+    left: clamp(12px, 3vw, 20px);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
     display: flex;
     flex-direction: column;
     gap: clamp(10px, 2vh, 14px);
@@ -418,7 +423,7 @@ nav a, .nav-items a { text-transform: none; }
     border-radius: 50%;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
-    order: 1; /* Dot first */
+    order: 1;
   }
 
   /* Project name text on the RIGHT of dot */
@@ -437,7 +442,7 @@ nav a, .nav-items a { text-transform: none; }
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 0;
-    order: 2; /* Text second */
+    order: 2;
   }
 
   /* Active state - reveal text */
@@ -476,7 +481,7 @@ nav a, .nav-items a { text-transform: none; }
     display: flex;
     flex-direction: row;
     gap: clamp(12px, 2.5vw, 20px);
-    isolation: isolate; /* Create stacking context */
+    isolation: isolate;
   }
 
   /* Fixed Index Number Container */
@@ -501,8 +506,8 @@ nav a, .nav-items a { text-transform: none; }
   /* Ensure pinned element stays visible */
   .mask-mobile.pin-active {
     position: fixed !important;
-    top: 20% !important;
-    z-index: 15 !important;
+    top: 10% !important;
+    z-index: 50 !important;
   }
 
   /* Digit wrapper */
@@ -514,13 +519,11 @@ nav a, .nav-items a { text-transform: none; }
     line-height: 1;
     letter-spacing: -0.05em;
     display: flex;
-    will-change: transform;
   }
 
   .digit-first,
   .digit-second {
     display: inline-block;
-    will-change: transform;
   }
 
   /* Images Grid */
@@ -576,6 +579,8 @@ nav a, .nav-items a { text-transform: none; }
     object-fit: cover !important;
     display: block !important;
     background: #000;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   /* Let's Collab Section */
@@ -843,7 +848,6 @@ nav a, .nav-items a { text-transform: none; }
   }
 
   .project-names-mobile {
-    top: clamp(130px, 50vh, 160px);
     left: clamp(6px, 1.5vw, 12px);
     max-width: clamp(100px, 22vw, 150px);
   }
@@ -852,5 +856,3 @@ nav a, .nav-items a { text-transform: none; }
     font-size: 8px;
   }
 }
-
-
