@@ -152,20 +152,20 @@ export default function AnimationScript() {
         { src: '/assets/img16.jpg', href: 'https://google.com' },
 
         // digital marketing
-        { src: '/assets/img17.webp', href: 'https://google.com' },
-        { src: '/assets/video26.mp4', href: 'https://google.com' },
-        { src: '/assets/img19.webp', href: 'https://google.com' },
-        { src: '/assets/img20.webp', href: 'https://google.com' },
-        { src: '/assets/video25.mp4', href: 'https://google.com' },
-        { src: '/assets/img22.jpg', href: 'https://google.com' },
+        { src: '/assets/img17.webp', href: '' },
+        { src: '/assets/video26.mp4', href: '' },
+        { src: '/assets/img19.webp', href: '' },
+        { src: '/assets/img20.webp', href: '' },
+        { src: '/assets/video25.mp4', href: '' },
+        { src: '/assets/img22.jpg', href: '' },
 
         // e-mail automation
-        { src: '/assets/img23.webp', href: 'https://google.com' },
-        { src: '/assets/img24.webp', href: 'https://google.com' },
-        { src: '/assets/img25.webp', href: 'https://google.com' },
-        { src: '/assets/img26.webp', href: 'https://google.com' },
-        { src: '/assets/img27.webp', href: 'https://google.com' },
-        { src: '/assets/img28.webp', href: 'https://google.com' },
+        { src: '/assets/img23.webp', href: '' },
+        { src: '/assets/img24.webp', href: '' },
+        { src: '/assets/img25.webp', href: '' },
+        { src: '/assets/img26.webp', href: '' },
+        { src: '/assets/img27.webp', href: '' },
+        { src: '/assets/img28.webp', href: '' },
 
         // consulting
         { src: '/assets/img29.jpg', href: '' },
