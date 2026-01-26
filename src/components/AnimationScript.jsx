@@ -120,32 +120,32 @@ export default function AnimationScript() {
 
       const mediaFiles = [
         // webdev
-        { src: '/assets/video2.mp4', href: 'https://google.com' },
-        { src: '/assets/img1.webp', href: 'https://google.com' },
-        { src: '/assets/video1.mp4', href: 'https://google.com' },
-        { src: '/assets/img3.webp', href: 'https://google.com' },
-        { src: '/assets/video4.mp4', href: 'https://google.com' },
-        { src: '/assets/video5.mp4', href: 'https://google.com' },
+        { src: '/assets/video2.mp4', href: 'https://quechua-lookbook.com/ss25/' },
+        { src: '/assets/img1.webp', href: 'https://www.orage.com/' },
+        { src: '/assets/video1.mp4', href: 'https://www.orage.com/' },
+        { src: '/assets/img3.webp', href: 'https://quechua-lookbook.com/ss25/' },
+        { src: '/assets/video4.mp4', href: 'https://hempelfoundation.com/' },
+        { src: '/assets/video5.mp4', href: 'https://norr11.com/' },
 
         // content creation
-        { src: '/assets/video6.mp4', href: 'https://google.com' },
-        { src: '/assets/video7.mp4', href: 'https://google.com' },
-        { src: '/assets/img5.webp', href: 'https://google.com' },
+        { src: '/assets/video6.mp4', href: '' },
+        { src: '/assets/video7.mp4', href: 'https://thibaud.film/' },
+        { src: '/assets/img5.webp', href: 'https://thibaud.film/' },
         { src: '/assets/img6.webp', href: 'https://google.com' },
-        { src: '/assets/video8.mp4', href: 'https://google.com' },
-        { src: '/assets/img7.webp', href: 'https://google.com' },
+        { src: '/assets/video8.mp4', href: 'https://thibaud.film/#works' },
+        { src: '/assets/img7.webp', href: 'https://pebblelife.com/' },
 
         // seo
         { src: '/assets/img8.webp', href: 'https://google.com' },
-        { src: '/assets/img9.webp', href: 'https://google.com' },
-        { src: '/assets/img10.webp', href: 'https://google.com' },
+        { src: '/assets/img9.webp', href: 'https://amici.com.cy/en/' },
+        { src: '/assets/img10.webp', href: 'https://www.gkaratzias.com/en/' },
         { src: '/assets/video11.mp4', href: 'https://google.com' },
-        { src: '/assets/img11.webp', href: 'https://google.com' },
+        { src: '/assets/img11.webp', href: 'https://www.bmadb.fr/' },
         { src: '/assets/img12.webp', href: 'https://google.com' },
 
         // branding
-        { src: '/assets/img13.webp', href: 'https://google.com' },
-        { src: '/assets/video12.mp4', href: 'https://google.com' },
+        { src: '/assets/img13.webp', href: 'https://pebblelife.com/' },
+        { src: '/assets/video12.mp4', href: 'https://sport-fleiss.at/en/ski-rent/' },
         { src: '/assets/img14.avif', href: 'https://google.com' },
         { src: '/assets/video13.mp4', href: 'https://google.com' },
         { src: '/assets/img15.png', href: 'https://google.com' },
@@ -168,44 +168,44 @@ export default function AnimationScript() {
         { src: '/assets/img28.webp', href: 'https://google.com' },
 
         // consulting
-        { src: '/assets/img29.jpg', href: 'https://google.com' },
-        { src: '/assets/img30.webp', href: 'https://google.com' },
-        { src: '/assets/video14.mp4', href: 'https://google.com' },
-        { src: '/assets/img31.jpg', href: 'https://google.com' },
-        { src: '/assets/img32.avif', href: 'https://google.com' },
-        { src: '/assets/img33.avif', href: 'https://google.com' },
+        { src: '/assets/img29.jpg', href: '' },
+        { src: '/assets/img30.webp', href: '' },
+        { src: '/assets/video14.mp4', href: '' },
+        { src: '/assets/img31.jpg', href: '' },
+        { src: '/assets/img32.avif', href: '' },
+        { src: '/assets/img33.avif', href: '' },
 
         // tech and cloud
-        { src: '/assets/img34.avif', href: 'https://google.com' },
-        { src: '/assets/img35.avif', href: 'https://google.com' },
-        { src: '/assets/img36.avif', href: 'https://google.com' },
-        { src: '/assets/img37.avif', href: 'https://google.com' },
-        { src: '/assets/img38.avif', href: 'https://google.com' },
-        { src: '/assets/img39.avif', href: 'https://google.com' },
+        { src: '/assets/img34.avif', href: '' },
+        { src: '/assets/img35.avif', href: '' },
+        { src: '/assets/img36.avif', href: '' },
+        { src: '/assets/img37.avif', href: '' },
+        { src: '/assets/img38.avif', href: '' },
+        { src: '/assets/img39.avif', href: '' },
 
         // smm
-        { src: '/assets/video15.mp4', href: 'https://google.com' },
-        { src: '/assets/img40.png', href: 'https://google.com' },
-        { src: '/assets/video16.mp4', href: 'https://google.com' },
-        { src: '/assets/img41.webp', href: 'https://google.com' },
-        { src: '/assets/video17.mp4', href: 'https://google.com' },
-        { src: '/assets/img42.webp', href: 'https://google.com' },
+        { src: '/assets/video15.mp4', href: '' },
+        { src: '/assets/img40.png', href: '' },
+        { src: '/assets/video16.mp4', href: '' },
+        { src: '/assets/img41.webp', href: '' },
+        { src: '/assets/video17.mp4', href: '' },
+        { src: '/assets/img42.webp', href: '' },
 
         // app dev
-        { src: '/assets/video21.mp4', href: 'https://google.com' },
-        { src: '/assets/img43.webp', href: 'https://google.com' },
-        { src: '/assets/img44.avif', href: 'https://google.com' },
-        { src: '/assets/video18.mp4', href: 'https://google.com' },
-        { src: '/assets/video19.mp4', href: 'https://google.com' },
-        { src: '/assets/video20.mp4', href: 'https://google.com' },
+        { src: '/assets/video21.mp4', href: '' },
+        { src: '/assets/img43.webp', href: '' },
+        { src: '/assets/img44.avif', href: '' },
+        { src: '/assets/video18.mp4', href: '' },
+        { src: '/assets/video19.mp4', href: '' },
+        { src: '/assets/video20.mp4', href: '' },
 
         // ai
-        { src: '/assets/video22.mp4', href: 'https://google.com' },
-        { src: '/assets/img45.png', href: 'https://google.com' },
-        { src: '/assets/img46.png', href: 'https://google.com' },
-        { src: '/assets/video23.mp4', href: 'https://google.com' },
-        { src: '/assets/video24.mp4', href: 'https://google.com' },
-        { src: '/assets/img47.jpg', href: 'https://google.com' },
+        { src: '/assets/video22.mp4', href: '' },
+        { src: '/assets/img45.png', href: '' },
+        { src: '/assets/img46.png', href: '' },
+        { src: '/assets/video23.mp4', href: '' },
+        { src: '/assets/video24.mp4', href: '' },
+        { src: '/assets/img47.jpg', href: 'https://klingai.com/global/' },
       ];
 
       imageContainers.forEach((container) => {
