@@ -26,7 +26,7 @@ export default function AnimationScript() {
     
     if (isSmall) {
       console.log('Mobile detected - Desktop AnimationScript skipped');
-      return; // EXIT EARLY - Let AnimationScriptMobile handle everything
+      return;
     }
 
     // ====== DESKTOP CODE ONLY BELOW THIS LINE ======
@@ -82,38 +82,9 @@ export default function AnimationScript() {
       return videoExtensions.some((ext) => filename.toLowerCase().endsWith(ext));
     }
 
-    function safePlay(video) {
-      if (!video) return;
-      const p = video.play();
-      if (p && typeof p.catch === 'function') p.catch(() => {});
-    }
-
     // Populate gallery
     const imagesPerProject = 6;
     let imageIndex = 0;
-
-    function createVideoElement(src) {
-      const video = document.createElement('video');
-
-      video.muted = true;
-      video.autoplay = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.preload = 'auto';
-
-      video.setAttribute('playsinline', '');
-      video.setAttribute('muted', '');
-      video.setAttribute('autoplay', '');
-      video.setAttribute('loop', '');
-
-      const source = document.createElement('source');
-      source.src = src;
-      source.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
-      video.appendChild(source);
-
-      safePlay(video);
-      return video;
-    }
 
     function populateGallery() {
       const imageContainers = document.querySelectorAll('.images');
@@ -226,7 +197,31 @@ export default function AnimationScript() {
           link.style.height = '100%';
 
           if (isVideo(src)) {
-            const video = createVideoElement(src);
+            const video = document.createElement('video');
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            video.setAttribute('muted', '');
+            video.setAttribute('loop', '');
+            video.setAttribute('playsinline', '');
+
+            const source = document.createElement('source');
+            source.src = src;
+            source.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+            video.appendChild(source);
+
+            // Play immediately when in viewport
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  video.play().catch(() => {});
+                } else {
+                  video.pause();
+                }
+              });
+            }, { threshold: 0.1 });
+
+            observer.observe(video);
             link.appendChild(video);
           } else {
             const img = document.createElement('img');
@@ -245,20 +240,6 @@ export default function AnimationScript() {
     }
 
     populateGallery();
-
-    // Warm-up videos
-    const warmObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const video = entry.target;
-          video.preload = 'auto';
-          safePlay(video);
-        });
-      },
-      { root: null, rootMargin: '600px 0px', threshold: 0.01 }
-    );
-    document.querySelectorAll('.img video').forEach((v) => warmObserver.observe(v));
 
     // Progress bar
     ScrollTrigger.create({
@@ -286,18 +267,12 @@ export default function AnimationScript() {
         if (!currentPreview || currentPreview.tagName.toLowerCase() !== 'video') {
           previewContainer.innerHTML = '';
           previewVideo = document.createElement('video');
-
           previewVideo.muted = true;
-          previewVideo.autoplay = true;
           previewVideo.loop = true;
           previewVideo.playsInline = true;
-          previewVideo.preload = 'auto';
-
           previewVideo.setAttribute('muted', '');
-          previewVideo.setAttribute('autoplay', '');
           previewVideo.setAttribute('loop', '');
           previewVideo.setAttribute('playsinline', '');
-
           previewContainer.appendChild(previewVideo);
         } else {
           previewVideo = currentPreview;
@@ -308,7 +283,7 @@ export default function AnimationScript() {
 
         previewVideo.src = source.src;
         previewVideo.load();
-        safePlay(previewVideo);
+        previewVideo.play().catch(() => {});
       } else {
         if (!currentPreview || currentPreview.tagName.toLowerCase() !== 'img') {
           const img = document.createElement('img');

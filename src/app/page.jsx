@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
-import Head from 'next/head';
+import Preloader from '@/components/Preloader';
 
 // Desktop Components
 import Footer from '@/components/Footer';
@@ -24,6 +24,8 @@ import AnimationScriptMobile from '@/components/AnimationScriptMobile';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [scriptsLoaded, setScriptsLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -36,16 +38,25 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Check if all scripts are loaded
+  useEffect(() => {
+    const checkScripts = setInterval(() => {
+      if (window.gsap && window.ScrollTrigger && window.Lenis && window.SplitType) {
+        clearInterval(checkScripts);
+        setScriptsLoaded(true);
+      }
+    }, 100);
+
+    return () => clearInterval(checkScripts);
+  }, []);
+
+  const handlePreloaderComplete = () => {
+    setLoading(false);
+  };
+
   return (
     <>
-      <Head>
-        {/* Preload only the FIRST couple of videos you want to feel instant */}
-        <link rel="preload" href="/assets/video2.mp4" as="video" type="video/mp4" />
-        <link rel="preload" href="/assets/video1.mp4" as="video" type="video/mp4" />
-        <link rel="preload" href="/assets/video4.mp4" as="video" type="video/mp4" />
-        <link rel="preload" href="/assets/video5.mp4" as="video" type="video/mp4" />
-      </Head>
-
+      {/* Load all scripts first */}
       <Script
         src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
         strategy="beforeInteractive"
@@ -58,30 +69,42 @@ export default function Home() {
         src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"
         strategy="beforeInteractive"
       />
+      <Script
+        src="https://unpkg.com/split-type"
+        strategy="beforeInteractive"
+      />
 
-      {isMobile ? (
+      {/* Show preloader only when scripts are loaded */}
+      {scriptsLoaded && loading && <Preloader onComplete={handlePreloaderComplete} />}
+
+      {/* Show content only after preloader completes */}
+      {!loading && scriptsLoaded && (
         <>
-          {/* Mobile Layout */}
-          <PortfolioHeadingMobile />
-          <GalleryMobile />
-          <LetsCollabMobile />
-          <ProjectNamesMobile />
-          <ProgressBarMobile />
-          <AnimationScriptMobile />
-        </>
-      ) : (
-        <>
-          {/* Desktop Layout */}
-          <PortfolioHeading />
-          <div className="whitespace w-1"></div>
-          <Gallery />
-          <div className="whitespace w-2"></div>
-          <LetsCollab />
-          <ProjectNames />
-          <PreviewMedia />
-          <ProgressBar />
-          <Footer />
-          <AnimationScript />
+          {isMobile ? (
+            <>
+              {/* Mobile Layout */}
+              <PortfolioHeadingMobile />
+              <GalleryMobile />
+              <LetsCollabMobile />
+              <ProjectNamesMobile />
+              <ProgressBarMobile />
+              <AnimationScriptMobile />
+            </>
+          ) : (
+            <>
+              {/* Desktop Layout */}
+              <PortfolioHeading />
+              <div className="whitespace w-1"></div>
+              <Gallery />
+              <div className="whitespace w-2"></div>
+              <LetsCollab />
+              <ProjectNames />
+              <PreviewMedia />
+              <ProgressBar />
+              <Footer />
+              <AnimationScript />
+            </>
+          )}
         </>
       )}
     </>
